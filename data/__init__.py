@@ -77,6 +77,7 @@ class CustomDatasetDataLoader():
         self.opt = opt
         dataset_class = find_dataset_using_name(opt.dataset_mode)  #dataset_mode default='unaligned' 是一个torch dataset对象。目前是UnalignedDataset。opt指定一些属性。find_dataset_using_name这个方法返回一个ビューオブジェクト
         self.dataset = dataset_class(opt) #将ビューオブジェクト实例化。 在这里是实例化UnalignedDataset
+        
         print("dataset [%s] was created" % type(self.dataset).__name__)
         self.dataloader = torch.utils.data.DataLoader(
             self.dataset,  #这个dataset继承于torch dataset class。 目前是unaligned_dataset类对象
