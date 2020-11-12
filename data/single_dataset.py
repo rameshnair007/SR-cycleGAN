@@ -1,5 +1,6 @@
 from data.base_dataset import BaseDataset, get_transform
 from data.image_folder import make_dataset
+from data.unaligned_mosaic_dataset import load_geotiff_as_array_with_metadata
 from PIL import Image
 
 
@@ -16,7 +17,8 @@ class SingleDataset(BaseDataset):
             opt (Option class) -- stores all the experiment flags; needs to be a subclass of BaseOptions
         """
         BaseDataset.__init__(self, opt)
-        self.A_paths = sorted(make_dataset(opt.dataroot, opt.max_dataset_size))
+        self.dir_A = os.path.join(opt.dataroot, 'test_ps_mosaic_chips/bahrain_test_ps_mosaic_quads') 
+        self.A_paths = sorted(make_dataset(self.dir_A, opt.max_dataset_size))
         input_nc = self.opt.output_nc if self.opt.direction == 'BtoA' else self.opt.input_nc
         self.transform = get_transform(opt, grayscale=(input_nc == 1))
 
@@ -31,7 +33,9 @@ class SingleDataset(BaseDataset):
             A_paths(str) - - the path of the image
         """
         A_path = self.A_paths[index]
-        A_img = Image.open(A_path).convert('RGB')
+        A_img, _ = load_geotiff_as_array_with_metadata(A_path)
+        A_img = Image.fromarray(A_img[...,:3])
+        
         A = self.transform(A_img)
         return {'A': A, 'A_paths': A_path}
 

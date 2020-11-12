@@ -35,9 +35,9 @@ class TrainOptions(BaseOptions):
         parser.add_argument('--pool_size', type=int, default=50, help='the size of image buffer that stores previously generated images')
         parser.add_argument('--lr_policy', type=str, default='linear', help='learning rate policy. [linear | step | plateau | cosine]')
         parser.add_argument('--lr_decay_iters', type=int, default=50, help='multiply by a gamma every lr_decay_iters iterations')
-        parser.add_argument('--A_patchs_num', type=int, default=10000, help='patch number of data A')
-        parser.add_argument('--B_patchs_num', type=int, default=10000, help='patch number of data B')
-        parser.add_argument('--A_patch_size', type=int, default=64, help='patch size of data A')
+        parser.add_argument('--A_patchs_num', type=int, default=2000, help='patch number of data A')
+        parser.add_argument('--B_patchs_num', type=int, default=2000, help='patch number of data B')
+        parser.add_argument('--A_patch_size', type=int, default=256, help='patch size of data A')
         parser.add_argument('--B_patch_size', type=int, default=256, help='patch size of data B')
         # my opintion
         parser.add_argument('--ps_mosaic_folder', type=str, default='', help='floder of clinicalCT')

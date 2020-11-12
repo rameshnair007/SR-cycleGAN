@@ -27,8 +27,8 @@ class UnalignedMosaicDataset(BaseDataset):
             opt (Option class) -- stores all the experiment flags; needs to be a subclass of BaseOptions
         """
         BaseDataset.__init__(self, opt)
-        self.dir_A = os.path.join(opt.dataroot, 'ps_mosaic_chips')  # create a path '/path/to/data/trainA'  dataroot是指定的数据文件夹,目前是./datasets/maps. 
-        self.dir_B = os.path.join(opt.dataroot, 'skysat_mosaic_chips')  # create a path '/path/to/data/trainB'
+        self.dir_A = os.path.join(opt.dataroot, 'ps_mosaic_chips/chips')  # create a path '/path/to/data/trainA'  dataroot是指定的数据文件夹,目前是./datasets/maps. 
+        self.dir_B = os.path.join(opt.dataroot, 'skysat_mosaic_chips/chips')  # create a path '/path/to/data/trainB'
 
         self.A_paths = sorted(make_dataset(self.dir_A, opt.max_dataset_size))   # load images from '/path/to/data/trainA'
         self.B_paths = sorted(make_dataset(self.dir_B, opt.max_dataset_size))    # load images from '/path/to/data/trainB'
@@ -66,7 +66,7 @@ class UnalignedMosaicDataset(BaseDataset):
         # apply image transformation
         A = self.transform_A(A_img) #transform_A是一个将PIL图像转换为tensor的函数，里面有各种选项
         B = self.transform_B(B_img)
-        print("get an item")
+        # print("get an item")
         # print(type(A)) #pytorch tensor 
         # print(type(B))
         # print(A_path)
